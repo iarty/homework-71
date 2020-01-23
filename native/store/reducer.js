@@ -1,7 +1,8 @@
-import { PICK_PIZZA, DELETE_PIZZA,CLEAR_STATE } from "./actions";
+import { PICK_PIZZA, DELETE_PIZZA, CLEAR_STATE } from "./actions";
 
 const initialState = {
-  orders: []
+  orders: [],
+  isComplete: false
 };
 
 const reducer = (state = initialState, action) => {
@@ -17,7 +18,8 @@ const reducer = (state = initialState, action) => {
       }
       return {
         ...state,
-        orders
+        orders,
+        isComplete: false
       };
       return { ...state };
     }
@@ -30,7 +32,8 @@ const reducer = (state = initialState, action) => {
     }
     case CLEAR_STATE: {
       return {
-        ...initialState
+        ...initialState,
+        isComplete: true
       };
     }
     default:

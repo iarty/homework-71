@@ -8,21 +8,17 @@ import { useFetch } from "../hooks/useFetch";
 import { clearState } from "../store/actions";
 
 export default function OrdersScreen() {
-  const orders = useSelector(state => state.orders);
+  const { orders, isComplete } = useSelector(state => state);
   const dispatch = useDispatch();
   const { request } = useFetch();
-  const { isComplete, setIsComplete } = useState(false);
   const delivery = 150;
   let total = 0;
   orders.forEach(el => (total += el.price * el.amount));
 
-  const sendData = async setIsComplete => {
+  const sendData = async () => {
     const data = {};
     orders.forEach(el => (data[el.id] = el.amount));
-    const response = await request("orders", "POST", data);
-    if (response) {
-      setIsComplete(true);
-    }
+    await request("orders", "POST", data);
     dispatch(clearState());
   };
 
