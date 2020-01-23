@@ -8,7 +8,7 @@ const Order = () => {
   const dispatch = useDispatch();
   const { orders } = useSelector(state => state.orders);
   const { dishes } = useSelector(state => state.dishes);
-
+console.log(orders);
   const refOrders = orders.map(order => {
     const orders = [];
     Object.keys(order).forEach(orderItem => {
